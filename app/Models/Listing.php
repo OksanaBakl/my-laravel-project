@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Listing extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'price'
@@ -19,6 +18,12 @@ class Listing extends Model
     protected $sortable = [
         'price', 'created_at'
     ];
+
+    public function getRecordById($id)
+{
+    return $this->where(sprintf('%s.id', $this->getTable()), '=', $id)
+                ->pluck('id');
+}
 
     public function owner(): BelongsTo
     {
