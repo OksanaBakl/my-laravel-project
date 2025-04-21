@@ -10,18 +10,14 @@
   </template>
   
   <script setup>
-import { Link } from '@inertiajs/vue3';
-
-import { computed } from 'vue'
+ import { computed } from 'vue'
  import { Link, usePage } from '@inertiajs/vue3'
  
  // const x = ref(0)
  // const y = computed(() => x.value * 2)
  
  const page = usePage()
- const flashSuccess = computed(
-   () => page.props.value.flash.success,
- )
+ const flashSuccess = computed(() => page.props.value?.flash?.success || null);
 // import { ref } from 'vue'  
 
 // const timer = ref(0)
